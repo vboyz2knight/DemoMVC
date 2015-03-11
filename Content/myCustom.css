@@ -1,0 +1,30 @@
+﻿html,
+#myBody {
+    margin:0;
+	padding:0;
+    height:100%;
+}
+
+/*#myHeader {
+	padding:20px;
+	background:#5ee;
+}*/
+
+#myWrapper {
+	min-height:100%;
+	position:relative;
+}
+
+#myContent {
+    min-height:100%;
+	padding:10px;
+	padding-bottom:80px;   /* Height of the footer element */
+}
+#myFooter {
+	width:100%;
+	height:80px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background:#ee5;
+}

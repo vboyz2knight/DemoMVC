@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title="CustomHelperView "
+}
+
+@helper EmailTextBox(string email, string title)
+{
+    <a href="mailto:@email">@title</a>
+}
