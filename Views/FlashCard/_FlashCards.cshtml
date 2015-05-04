@@ -1,0 +1,65 @@
+﻿@model DemoMVC.Classes.Drug
+
+
+
+<div>
+    <h4>Drug</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DrugType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrugType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrugGeneric)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrugGeneric)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrugBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrugBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Action)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Action)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Therapeutic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Therapeutic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indication)
+        </dd>
+
+    </dl>
+</div>
+
+
+@{
+    int item = 0;
+
+    int b = 1;
+}

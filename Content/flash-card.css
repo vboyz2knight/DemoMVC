@@ -1,0 +1,38 @@
+﻿body {
+}
+
+.displayFront{
+    width: 100%;
+    height:250px;
+    padding: 1px;
+    border: 1px solid navy;
+    margin: 1px;
+}
+
+.displayBack{
+    width: 100%;
+    height:250px;
+    padding: 1px;
+    border: 1px solid navy;
+    margin: 1px;
+    overflow:auto;
+}
+
+.displayContent{
+   display: table;
+   width: 100%;
+   height: 100%;
+}
+
+.displayContent span{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.displayContent:hover{
+    -moz-box-shadow: 0 0 30px #ccc;
+    -webkit-box-shadow: 0 0 30px #ccc;
+    box-shadow: 0 0 30px #ccc;
+    cursor:pointer; cursor: hand;
+}

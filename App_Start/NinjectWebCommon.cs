@@ -11,6 +11,7 @@ namespace DemoMVC.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using DemoMVC.Respiratory;
 
     public static class NinjectWebCommon 
     {
@@ -63,6 +64,7 @@ namespace DemoMVC.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IMessagingService>().To<MyEmailService>();
+            kernel.Bind<IDrugCardsRepository<Drug>>().To<DrugCardsRepository>();
         }        
     }
 }
