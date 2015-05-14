@@ -1,0 +1,116 @@
+﻿
+  <form id="Form1" >
+    <div class="container">
+        <div class="jumbotron">
+            <fieldset class="responsive-fieldset">
+                <legend>Initial Ventilator Settings Calculator</legend>
+                <div class="container">
+                    <div class="row" align="center">
+                        <div class="col-md-2">
+                            <DropDownList ID="DropDownListM_F" >
+                                <listitem text="Male" value="Male"></listitem>
+                                <listitem text="Female" value="Female"></listitem>
+                            </DropDownList>
+                        </div>
+                        <div class="col-md-2">
+                            <TextBox ID="TextBoxHeight"  Width="75"></TextBox>
+                        </div>
+
+                        <div class="col-md-2">
+                            <RequiredFieldValidator ID="RequiredFieldValidator1" 
+                                                        ErrorMessage="RequiredFieldValidator" ControlToValidate="TextBoxHeight"></RequiredFieldValidator>
+                        </div>
+                        <div class="col-md-2">
+                            <DropDownList ID="DropDownListInchesOrCm" >
+                                <listitem text="inches" value="inches"></listitem>
+                                <listitem text="cm" value="cm"></listitem>
+                            </DropDownList>
+                        </div>
+                        <div class="col-md-2">Ideal Body Weight</div>
+                        <div class="col-md-2">
+                            <Label ID="LabelIBW"  Text="IBW"></Label>
+                        </div>
+                    </div>
+                    <div class="row" align="center">
+                        <div class="col-md-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-2">
+                            1 ft = 12 inches
+                        </div>
+                        <div class="col-md-2">1 inch = 2.54 cm</div>
+                        <div class="col-md-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-2">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row" align="center">
+                        <div class="col-md-12">&nbsp;</div>
+                    </div>
+                    <div class="row" align="center">
+                        <div class="col-md-12">
+                            <Button ID="ButtonAnalyze"  Text="Solve" OnClick="ButtonAnalyze_Click" />
+                        </div>
+                    </div>
+                    <div class="row" align="center">
+                        <div class="col-md-12">
+                            <Label ID="LabelErrorMsg" ></Label>
+                            &nbsp;
+                        </div>
+                    </div>
+                    <Panel ID="PanelVentTable"  Visible="False">
+                        <div class="table-responsive" id="ventTable">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        5mL/kg
+                                    </th>
+                                    <th>
+                                        6mL/kg
+                                    </th>
+                                    <th>
+                                        7mL/kg
+                                    </th>
+                                    <th>
+                                        8mL/kg
+                                    </th>
+                                    <th>
+                                        9mL/kg
+                                    </th>
+                                    <th>
+                                        10mL/kg
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <Label ID="Label5ml"  Text=""></Label>
+                                    </td>
+                                    <td>
+                                        <Label ID="Label6ml"  Text=""></Label>
+                                    </td>
+                                    <td>
+                                        <Label ID="Label7ml"  Text=""></Label>
+                                    </td>
+                                    <td>
+                                        <Label ID="Label8ml"  Text=""></Label>
+                                    </td>
+                                    <td>
+                                        <Label ID="Label9ml"  Text=""></Label>
+                                    </td>
+                                    <td>
+                                        <Label ID="Label10ml"  Text=""></Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </Panel>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>

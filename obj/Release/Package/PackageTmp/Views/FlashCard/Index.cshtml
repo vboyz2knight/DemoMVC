@@ -1,0 +1,90 @@
+﻿@model DemoMVC.Models.FlashDrugSetModel
+
+@section header
+{
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
+}
+
+@{
+    ViewBag.Title = "Common drug flash cards";
+}
+
+<h2>Drug Flash Card Set</h2>
+
+
+<div class="container">
+    @using (Ajax.BeginForm("DrugSearch", "FlashCard", new AjaxOptions() { UpdateTargetId = "searchResult", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-3">
+            <div><b>Drug: </b></div>
+            <div>@Html.TextBox("term", null, new { id = "searchTxt" })</div>
+
+            <div><input type="submit" id="searchButton" name="searchButton" value="Search" /></div>
+
+            @{
+                List<SelectListItem> dropDownListItems = new List<SelectListItem>();
+            
+                foreach (var item in ViewBag.myDrugTypes)
+                {
+                    dropDownListItems.Add(new SelectListItem { Text = item, Value = item });
+                }
+            }
+
+            <hr />
+            <div>@Html.DropDownList("DrugType", dropDownListItems, "Select Drug Type")</div>
+                
+            </div>
+            <div class="col-sm-9">
+                <div id="searchResult">
+
+                </div>
+            </div>
+        }
+</div>
+
+<hr />
+
+@using (Ajax.BeginForm("FlashMyCard", "FlashCard", new AjaxOptions() { UpdateTargetId = "updateRegion", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }))
+{ 
+    @Html.AntiForgeryToken()
+
+    <div id="updateRegion">
+        @Html.Partial("_FlashMyCard", Model)
+    </div>
+    
+    <input type="submit" name="submit" value="Previous" />
+    <input type="submit" name="submit" value="Next" />
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")﻿
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")﻿
+    <script src="~/Scripts/jquery-ui.js"></script>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#searchTxt").autocomplete({
+            source: '@Url.Action("GetSearchDrugs")'
+        });
+    });
+
+    $(document).ready($('#DrugType').change(function () {
+        var selectedOption = $('#DrugType').val();
+
+        $.ajax({
+            url: '@Url.Action("DrugTypeSearch")',
+            type: "GET",
+            data: { 'drugTypeSearch': $(this).val() },
+            dataType: "html",
+            success: function(result) { $('#searchResult').html(result); },
+            error: function(error) { alert(error); }
+        } );
+    }));
+
+    $(document).ready($('#searchButton').click(function(){$('#DrugType').get(0).selectedIndex = 0;}));
+</script>

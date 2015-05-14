@@ -184,6 +184,7 @@
     <Compile Include="Controllers\FlashCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RespiratoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +235,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\CustomHTMLHelpers.cshtml" />
+    <None Include="Properties\PublishProfiles\MVC.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -295,6 +297,9 @@
     <Content Include="Views\FlashCard\_FlashMyCard.cshtml" />
     <Content Include="Views\FlashCard\_SearchDrugsResult.cshtml" />
     <Content Include="Views\Respiratory\Intubation_CheckList.cshtml" />
+    <Content Include="Views\Respiratory\inputGenTest.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Respiratory\InitialVentSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
