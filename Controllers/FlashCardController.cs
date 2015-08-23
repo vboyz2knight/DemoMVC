@@ -19,7 +19,7 @@ namespace DemoMVC.Controllers
         }
 
         // GET: FlashCard
-        public ActionResult Index()
+        public ActionResult Indexs()
         {
             List<Drug> myDrugList =  this.cardRepository.GetAllDrugs();
             //List<Drug> myDrugList = new DrugCardsRepository().GetAllDrugs();

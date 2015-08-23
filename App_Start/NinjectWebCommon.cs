@@ -12,6 +12,8 @@ namespace DemoMVC.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using DemoMVC.Respiratory;
+    using SimpleMathExpression;
+    //using NLog;
 
     public static class NinjectWebCommon 
     {
@@ -63,8 +65,12 @@ namespace DemoMVC.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IMessagingService>().To<MyEmailService>();
-            kernel.Bind<IDrugCardsRepository<Drug>>().To<DrugCardsRepository>();
+            kernel.Bind<IMessagingService>().To<MyEmailService>().InSingletonScope();
+            kernel.Bind<IDrugCardsRepository<Drug>>().To<DrugCardsRepository>().InSingletonScope();
+            kernel.Bind<ICacheProvider>().To<DefaultCacheFileDependencyProvider>().Named("FileDependency");
+            kernel.Bind<IReadEquationData<Equation>>().To<ReadEquationsFromXML>().InSingletonScope();
+            kernel.Bind<IMathExpressionParser>().To<SimpleExpressionParser>();
+            //kernel.Bind<IMyLogger>().To<NLogLogger>();
         }        
     }
 }

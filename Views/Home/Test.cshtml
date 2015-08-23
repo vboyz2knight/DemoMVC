@@ -1,16 +1,98 @@
-﻿
-<div class="col-sm-3">1</div>
-<div class="col-sm-3">2</div>
-<div class="col-sm-3">3</div>
-<div class="col-sm-3">4</div>
-<div class="col-sm-3">5</div>
-<div class="col-sm-3">6</div>
-<div class="col-sm-3">7</div>
-<div class="col-sm-3">8</div>
-<div class="col-sm-3">9</div>
-<div class="col-sm-3">10</div>
-<div class="col-sm-3">11</div>
-<div class="col-sm-3">12</div>
-<div class="col-sm-3">13</div>
-<div class="col-sm-3">14</div>
-<div class="col-sm-3">15</div>
+﻿<style type="text/css">
+
+    .box {
+        text-align: center;
+        background: #c0c0c0;
+        border: #a0a0a0 solid 1px;
+        height: 200px;
+        width: 200px;
+        float: left;
+    }
+
+    .centered {
+        display: inline-block;
+        vertical-align: middle;
+        width: 200px;
+        line-height: 200px;
+        border: #a0a0a0 solid 1px;
+        background: #f5f5f5;
+    }
+</style>
+
+<form>
+    <div >
+        <fieldset class="responsive-fieldset">
+            <legend>Initial Ventilator Settings Calculator</legend>
+            <div class="box"><div class="centered">1</div></div>
+            <div class="box"><div class="centered">2</div></div>
+            <div class="box"><div class="centered">3</div></div>
+            <div class="box"><div class="centered">4</div></div>
+            <div class="box"><div class="centered">5</div></div>
+            <div class="box"><div class="centered">6</div></div>
+            <div class="box"><div class="centered">7</div></div>
+            <div class="box"><div class="centered">8</div></div>
+            <div class="box"><div class="centered">9</div></div>
+            <div class="box"><div class="centered">10</div></div>
+            <div class="box"><div class="centered">11</div></div>
+            <div class="box"><div class="centered">12</div></div>
+            <div class="box"><div class="centered">13</div></div>
+            <div class="box"><div class="centered">14</div></div>
+            <div class="box"><div class="centered">15</div></div>
+        </fieldset>
+    </div>
+</form>
+
+
+
+    <script language="javascript" type="text/javascript">
+
+    //Creating the instance of the XmlHttpRequest
+    // branch for native XMLHttpRequest object
+    var client=null;
+    if (window.XMLHttpRequest)
+    {
+        client = new XMLHttpRequest();
+    } // branch for IE/Windows ActiveX version
+    else if (window.ActiveXObject)
+    {
+        client = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    //sending information to server
+    function doCall()
+    {
+        try
+        {
+        client.onreadystatechange = callBack;
+        client.open("GET", "http://www.google.com/webhp?nord=1#nord=1&q=vboyz2knight&safe=active", true);
+        client.send();
+        }catch(ex)
+        {
+        alert(ex.message);
+        }
+    }
+
+    //waiting and processing server response
+    function callBack(response)
+    {
+        try
+        {
+            if(client.readyState == 4 && client.status == 200)
+            {
+            document.getElementById("panel").innerHTML=client.responseText;
+            }
+         }
+        catch(ex)
+         {
+         alert(ex.message);
+         }
+    }
+    </script>
+
+    <h4>Reading server response Using XMLHttpRequest</h4>
+    Server URL: <input id="txtURL" type="text" value="HtmlPage2.htm" />
+    <input type="button" value="Call" onclick="doCall()" />
+    <br />[Output]
+    <hr />
+    <div id="panel"></div>
+    <hr />

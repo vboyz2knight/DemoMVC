@@ -49,6 +49,9 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -172,32 +175,47 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Classes\DefaultCacheFileDependencyProvider.cs" />
-    <Compile Include="Classes\EmailService.cs" />
-    <Compile Include="Classes\ICacheProvider.cs" />
-    <Compile Include="Classes\IDrugCardsRepository.cs" />
-    <Compile Include="Classes\IMessagingService.cs" />
-    <Compile Include="Classes\IReadDrugData.cs" />
-    <Compile Include="Classes\Message.cs" />
+    <Compile Include="Cache\DefaultCacheFileDependencyProvider.cs" />
+    <Compile Include="Cache\ICacheProvider.cs" />
     <Compile Include="Classes\MyRandomizeStringArray.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FlashCardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RespiratoryController.cs" />
+    <Compile Include="FlashCard\Drug.cs" />
+    <Compile Include="FlashCard\Equation.cs" />
+    <Compile Include="FlashCard\IDrugCardsRepository.cs" />
+    <Compile Include="FlashCard\IEquationsRepository.cs" />
+    <Compile Include="FlashCard\IReadDrugData.cs" />
+    <Compile Include="FlashCard\IReadEquationData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Loggers\IMyLogger.cs" />
+    <Compile Include="Loggers\LogUtility.cs" />
+    <Compile Include="Loggers\NLogLogger.cs" />
+    <Compile Include="Loggers\UtcDateRenderer.cs" />
+    <Compile Include="Loggers\WebVariablesRenderer.cs" />
+    <Compile Include="Messaging\EmailService.cs" />
+    <Compile Include="Messaging\IMessagingService.cs" />
+    <Compile Include="Messaging\Message.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BudgetTrackerController.cs" />
     <Compile Include="Models\ContactModels.cs" />
-    <Compile Include="Classes\Drug.cs" />
+    <Compile Include="Models\EquationAnswerViewModel.cs" />
+    <Compile Include="Models\FlashADrugModel.cs" />
     <Compile Include="Models\FlashDrugSetModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SearchDrugsModel.cs" />
+    <Compile Include="Models\TankDurationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Respiratory\DrugCardsRepository.cs" />
+    <Compile Include="Respiratory\EquationsRepository.cs" />
     <Compile Include="Respiratory\ReadDrugsDataFromXML.cs" />
+    <Compile Include="Respiratory\ReadEquationsFromXML.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +243,7 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\myCustom.css" />
+    <Content Include="Content\myResponsiveTable.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,9 +251,16 @@
     <Content Include="Respiratory\ACCS_Drugs.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Respiratory\RespiratoryEquations.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\CustomHTMLHelpers.cshtml" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\MVC.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -293,17 +319,31 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\SuccessContact.cshtml" />
-    <Content Include="Views\FlashCard\Index.cshtml" />
+    <Content Include="Views\FlashCard\Indexs.cshtml" />
     <Content Include="Views\FlashCard\_FlashMyCard.cshtml" />
     <Content Include="Views\FlashCard\_SearchDrugsResult.cshtml" />
     <Content Include="Views\Respiratory\Intubation_CheckList.cshtml" />
     <Content Include="Views\Respiratory\inputGenTest.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Respiratory\InitialVentSettings.cshtml" />
+    <Content Include="Views\BudgetTracker\Index.cshtml" />
+    <Content Include="Views\Respiratory\EquationGeneratorForm.cshtml" />
+    <Content Include="Views\Respiratory\ListRespiratoryEquations.cshtml" />
+    <Content Include="Views\Respiratory\RespiratoryEquationForm.cshtml" />
+    <Content Include="Views\Respiratory\TankDuration.cshtml" />
+    <Content Include="Views\Projects\EulerExamples.cshtml" />
+    <Content Include="Views\Projects\LearnJavaScript.cshtml" />
+    <Content Include="Views\FlashCard\_FlashACard.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\FlashCard\_FlashCards.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Respiratory\ACLSNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="TestLayouts\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -311,6 +351,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleMathExpression\SimpleMathExpression.csproj">
+      <Project>{0800ffea-373b-43df-a7bb-c53d634a7930}</Project>
+      <Name>SimpleMathExpression</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
