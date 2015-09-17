@@ -8,6 +8,7 @@ using DemoMVC.Classes;
 using Ninject;
 using DemoMVC.Models;
 using SimpleMathExpression;
+using DemoMVC.Loggers;
 
 namespace DemoMVC.Controllers
 {
@@ -16,11 +17,11 @@ namespace DemoMVC.Controllers
         private ICacheProvider Cache;
         private IReadEquationData<Equation> ReadEquationData;
         private IMathExpressionParser MathExpressionParser;
-        //private IMyLogger logger;
+        private IMyLogger myLogger;
 
-        public RespiratoryController([Named("FileDependency")]ICacheProvider cache, IReadEquationData<Equation> readEquationData,IMathExpressionParser mathExpressionParser)
+        public RespiratoryController([Named("FileDependency")]ICacheProvider cache, IReadEquationData<Equation> readEquationData,IMathExpressionParser mathExpressionParser,IMyLogger logger)
         {
-            //this.logger = Logger;
+            this.myLogger = logger;
             this.Cache = cache;
             this.ReadEquationData = readEquationData;
             this.MathExpressionParser = mathExpressionParser;
@@ -67,7 +68,7 @@ namespace DemoMVC.Controllers
                         }
                         else
                         {
-                            //logger.Error("Error using SimpleCalculatorService.", e);
+                            myLogger.Error("Error using SimpleCalculatorService: "+ error);
                             return View("Error");
                         }
                         //DemoMVC.SimpleCalcServiceConsoleHost.CalculatorClient calculatorClient = new SimpleCalcServiceConsoleHost.CalculatorClient();
@@ -93,6 +94,8 @@ namespace DemoMVC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    myLogger.Error("Error using SimpleCalculatorService: ",ex);
+                    return View("Error");
                     //ErrorSignal.FromCurrentContext().Raise(ex);
                 }
             }
@@ -168,7 +171,7 @@ namespace DemoMVC.Controllers
                 }
                 else
                 {
-                    //logger.Error("Error using SimpleExpressionParser {0}.", error);
+                    myLogger.Error("Error using SimpleCalculatorService: "+error);
                     return View("Error");
                 }
 
@@ -196,7 +199,8 @@ namespace DemoMVC.Controllers
             }
             else
             {
-                throw new ArgumentNullException("Key not found.");
+                myLogger.Error("Key not found.");
+                return View("Error");
             }
 
             return View(equationAnswerViewModel);

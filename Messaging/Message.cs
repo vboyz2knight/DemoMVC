@@ -16,14 +16,10 @@ namespace DemoMVC.Classes
         [Required(ErrorMessage = "From Email is required.")]
         public string From { get; private set; }
 
-        [Required(ErrorMessage = "To Email is required.")]
-        [EmailAddress(ErrorMessage = "Not a valid email.")]
-        public string To { get; private set; }
-
         [Required(ErrorMessage = "Body is required.")]
         public string Body { get; private set; }
 
-        public Message(string subject, string from, string to, string body)
+        public Message(string subject, string from, string body)
         {
             if (!String.IsNullOrEmpty(subject))
             {
@@ -41,15 +37,6 @@ namespace DemoMVC.Classes
             else
             {
                 throw new ArgumentNullException("From in message is empty or null.");
-            }
-
-            if (!String.IsNullOrEmpty(to))
-            {
-                this.To = to;
-            }
-            else
-            {
-                throw new ArgumentNullException("To in message is empty or null.");
             }
 
             if (!String.IsNullOrEmpty(body))

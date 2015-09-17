@@ -13,7 +13,7 @@ namespace DemoMVC.App_Start
     using Ninject.Web.Common;
     using DemoMVC.Respiratory;
     using SimpleMathExpression;
-    //using NLog;
+    using DemoMVC.Loggers;
 
     public static class NinjectWebCommon 
     {
@@ -70,7 +70,7 @@ namespace DemoMVC.App_Start
             kernel.Bind<ICacheProvider>().To<DefaultCacheFileDependencyProvider>().Named("FileDependency");
             kernel.Bind<IReadEquationData<Equation>>().To<ReadEquationsFromXML>().InSingletonScope();
             kernel.Bind<IMathExpressionParser>().To<SimpleExpressionParser>();
-            //kernel.Bind<IMyLogger>().To<NLogLogger>();
+            kernel.Bind<IMyLogger>().To<NLogLogger>().InSingletonScope();
         }        
     }
 }

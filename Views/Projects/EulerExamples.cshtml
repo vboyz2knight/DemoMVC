@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "EulerExamples";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EulerExamples</h2>
+
+<form id="evenFibonacciNumber" action="">
+    <div class="row">
+        <div class="col-md-4">
+            <p>Even Fibonacci numbers</p>
+        </div>
+        <div class="col-md-3">
+            <lablel for="evenFibonacciInput">Max Fibonacci term:</lablel>
+            <input type="number" name="evenFibonacciInput" id="evenFibonacciInput" min="3" size="5">
+        </div>
+        
+        <div class="col-md-2">
+            <input type="button" name="submit_evenFibonacci" id="submit_evenFibonacci" value="Submit">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <lablel for="evenFibonacci_answer">Answer: </lablel>
+            <p id="evenFibonacci_answer">
+            </p>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    //$('#evenFibonacciNumber').submit(function (e) {
+    $('#submit_evenFibonacci').click(function (e) {
+        e.preventDefault;
+        //var inputData = $(this).serialize();
+
+        $.ajax({
+            method: "GET",
+            url: '@Url.Action("sumEvenFibonacci")',
+            data: { maxTerm: $('#evenFibonacciInput').val() },
+            success: function (result) { $('#evenFibonacci_answer').html(result); },
+            error: function (error) { alert(error.status); $('#evenFibonacci_answer').html(error); }
+        });//end ajax
+    }//end function(e) near .submit
+    );//end submit
+
+</script>
+
+<br /><br />
+<form id="multiple3And5Form" action="">
+    <div class="row">
+        <div class="col-md-4">
+            <p>Multiples of 3 and 5</p>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="multiple3And5" id="multiple3And5" min="0" size="5">
+        </div>
+        <div class="col-md-3">
+            <p id="multiple3And5_answer">
+            </p>
+        </div>
+        <div class="col-md-2">
+            <input type="button" name="submit_multiple3And5" id="submit_multiple3And5" value="Submit">
+        </div>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    //$('#multiple3And5Form').submit(function (e) {
+    $('#submit_multiple3And5').click(function (e) {
+        e.preventDefault;
+        //var inputData = $(this).serialize();
+
+        $.ajax({
+            method: "POST",
+            url: '@Url.Action("multiple3And5Method")',
+            data: { multiple3And5: $('#multiple3And5').val() },
+            success: function (result) { $('#multiple3And5_answer').html("Answer: "+result); alert(result); },
+            error: function (error) { alert(error.status); $('#multiple3And5_answer').html(error); }
+        });//end ajax
+    }//end function(e) near .submit
+    );//end submit
+
+</script>

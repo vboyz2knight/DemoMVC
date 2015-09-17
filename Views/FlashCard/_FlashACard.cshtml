@@ -1,0 +1,76 @@
+﻿@model DemoMVC.Classes.Drug
+
+<div>
+    <h4>FlashADrugModel</h4>    
+</div>
+
+<div>
+    <h4>Drug</h4>
+    <hr />
+    <div class="displayFront">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(m => m.DrugBrand)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.DrugBrand)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="displayBack">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(m => m.DrugType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.DrugType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(m => m.DrugGeneric)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.DrugGeneric)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(m => m.Action)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.Action)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(m => m.Therapeutic)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.Therapeutic)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(m => m.Indication)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(m => m.Indication)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<script type="text/javascript">
+    $('.displayBack').hide();
+    $('.displayFront, .displayBack').on('click',
+                              function () {
+                                  $('.displayFront, .displayBack').toggle()
+                              }
+                           );
+</script>

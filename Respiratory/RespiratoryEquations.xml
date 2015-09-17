@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<equations>
+  <!--All equations need to be in  (equation) and no spaces-->
+  <equation>
+    <abbreviation>Ideal_Body_Weight_Male</abbreviation>
+    <id>Ideal body weight for male</id>
+    <description> Used in finding the estimated ideal body weight for male.</description>
+    <equationExpression>(50+(2.3*Height_over_5ft))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Ideal_Body_Weight_Female</abbreviation>
+    <id>Ideal body weight for female</id>
+    <description> Used in finding the estimated ideal body weight for female.</description>
+    <equationExpression>(45.5+(2.3*Height_over_5ft))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Desired_FIO2</abbreviation>
+    <id>Desired FIO2</id>
+    <description> Used in finding the desired FIO2 to achieve desired PAO2.</description>
+    <equationExpression>((Desired_PAO2*Known_FIO2)/Known_PAO2)</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Desired_MinuteVentilation</abbreviation>
+    <id>Desired minute ventilation</id>
+    <description> Used in finding the desired minute ventilation to achieve desired CO2.</description>
+    <equationExpression>((Known_PCO2*Known_Minute_Ventilation)/Desired_CO2)</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>PAO2</abbreviation>
+    <id>partial pressure of alveolar gas</id>
+    <description> Used in assessing if the lungs are properly transferring oxygen into the blood.</description>
+    <equationExpression>((Pb-Ph20)*FIO2-(PaCO2/0.8))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>A-aDO2</abbreviation>
+    <id>A-a Gradient</id>
+    <description> Measures the difference between alveolar and arterial PO2. 25-65 mmHg Normal: 66-300 mHG V/Q mismatch: >300 mmHG Shunting</description>
+    <equationExpression>(AlveolarPAO2-ArterialPO2)</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>CaO2</abbreviation>
+    <id>Arterial Oxygen Content</id>
+    <description> Best measurement of oxygen delivered to the tissues. Normal value 17-20 vol % (mL/dl)</description>
+    <equationExpression>((Hb*1.34*SaO2)+(PaO2*.003))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>CvO2</abbreviation>
+    <id>Mixed venous oxygen content</id>
+    <description> Total amount of oxygen carried in mixed venous blood. Normal value 12-16 vol %</description>
+    <equationExpression>((Hb*1.34*SvO2)+(PvO2*.003)))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>C(a-v)O2</abbreviation>
+    <id>Arterial-venous oxygen content difference</id>
+    <description> Measure oxygen consumption of tissues. Normal value 4-5 vol %</description>
+    <equationExpression>(CaO2-CvO2)</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Qt</abbreviation>
+    <id>Cardiac output</id>
+    <description> Fick equation. Normal value 4-8 L/min.</description>
+    <equationExpression>(VO2/((CaO2-CvO2)*10))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Qs/Qt</abbreviation>
+    <id>Shunt equation</id>
+    <description> Portion of cardiac output that is shunted. Normal value 3-5%</description>
+    <equationExpression>((AaGradient*.003)/(AaGradient*.003+(CaO2-CvO2)))</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Vd/Vt</abbreviation>
+    <id>Deadspace to tidal volume ratio</id>
+    <description> Percentage of tidal volumme that is deadspace. Normal value 20-40% </description>
+    <equationExpression>(((PaCo2-PECO2)/PaCo2)*100)</equationExpression>
+  </equation>
+
+  <equation>
+    <abbreviation>Tank_Oxygen_Duration</abbreviation>
+    <id>Tank_Oxygen_Duration</id>
+    <description>How many minutes does a oxygen tank last depend on psi, tank type and how many liter flow.</description>
+    <equationExpression>(gauge_pressure_psi*tank_factor)/liter_flow_L</equationExpression>
+  </equation>
+</equations>

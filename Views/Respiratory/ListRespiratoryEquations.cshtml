@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DemoMVC.Classes.Equation>
+
+@{
+    ViewBag.Title = "Respiratory Equations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of respiratory equations</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <h3>Abbreviation</h3>
+        </div>
+        <div class="col-md-6">
+            <h3>Equation</h3>
+        </div>
+        <div class="col-md-4">
+            <h3>Equation</h3>
+        </div>
+        <br /><br />
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2">
+                @Html.ActionLink(item.Abbreviation, "EquationGeneratorForm", "Respiratory", new { abbreviation = item.Abbreviation }, null)
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(modelItem => item.Description)
+            </div>
+            <div class="col-md-4">
+                @Html.DisplayFor(modelItem => item.EquationExpression)
+            </div>
+            <br /><br />
+        }
+    </div>
+</div>

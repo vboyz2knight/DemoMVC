@@ -5,6 +5,7 @@ using System.Web;
 using System.Net.Mail;
 using System.Text;
 using DemoMVC.Models;
+using System.Configuration;
 
 namespace DemoMVC.Classes
 {
@@ -12,8 +13,12 @@ namespace DemoMVC.Classes
     {
         public void SendMessage(Message message)
         {
-            MailMessage msg = new MailMessage(message.From,message.To,message.Subject,message.Body);
-            SmtpClient smtp = new SmtpClient();
+            var smtp = new System.Net.Mail.SmtpClient();
+            smtp.EnableSsl = true;
+
+            string sendErrorEmailTo = System.Configuration.ConfigurationManager.AppSettings["sendErrorEmailTo"];
+
+            MailMessage msg = new MailMessage(message.From, sendErrorEmailTo, message.Subject, message.Body);            
             
             msg.IsBodyHtml = false;
             

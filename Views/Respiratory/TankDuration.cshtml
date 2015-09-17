@@ -1,0 +1,70 @@
+﻿@model DemoMVC.Models.TankDurationViewModel
+
+@{
+    ViewBag.Title = "TankDuration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TankDuration</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>TankDurationViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.gauge_pressure_psi, "Guage Pressure (psi)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.gauge_pressure_psi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.gauge_pressure_psi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.liter_flow_L, "Liter Flow (L)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.liter_flow_L, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.liter_flow_L, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2"></div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(x=>x.selectedTankFactor,Model.tank_factor_list,"Tank Type")                
+                @Html.ValidationMessageFor(model => model.selectedTankFactor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @{
+            if(Model.myAnswer.HasValue)
+            {
+            <hr />
+            <div class="form-group">
+                <div class="col-md-2 control-label">
+                    <label for="answert">Answer</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="number" name="answer" id="answer" value="@Model.myAnswer" placeholder="Answer" step="0.01" readonly />
+                </div>
+            </div>
+            }
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")﻿
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")﻿
+}
+

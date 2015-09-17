@@ -140,6 +140,7 @@ namespace DemoMVC.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [NonAction]
         public ActionResult Register()
         {
             return View();
@@ -149,6 +150,7 @@ namespace DemoMVC.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        [NonAction]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

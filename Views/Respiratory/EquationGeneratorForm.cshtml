@@ -1,0 +1,118 @@
+﻿@model DemoMVC.Models.EquationAnswerViewModel
+
+@{
+    ViewBag.Title = "Equation Generator Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.myEquation.Id</h2>
+<h4>@Model.myEquation.Description</h4>
+<h4>@Model.myEquation.EquationExpression</h4>
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+
+        <div class="form-horizontal"><hr />
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @{
+        string[] splitExpression = Model.myEquation.EquationExpression.Split(new Char[] { '(', ')', '+', '-', '*', '/', '^', '%' });
+
+            List<string> inputList = new List<string>();
+            <input type="hidden" name="abbreviation" value="@Model.myEquation.Abbreviation" />            
+            
+            foreach (string input in splitExpression)
+            {
+                if (input.Trim() != "")
+                {
+                    //duplication?
+                    if (!inputList.Contains(input))
+                    {
+                        float fResult = 0;
+                        //don't want numbers
+                        if (!float.TryParse(input, out fResult))
+                        {
+                            inputList.Add(input);
+
+                            <div class="form-group">
+                                <div class="col-md-2 control-label">
+                                    <label for="@input">@input</label>
+                                </div>
+                                <div class="col-md-10">
+                                    @{
+                                        string myValue = "";
+                            
+                                        if(Model.myCollection!=null)
+                                        { 
+                                            if(Model.myCollection.ContainsKey(input))
+                                            {
+                                                myValue = Model.myCollection[input];
+                                            }
+                                        }
+}
+                                    
+                                    <input type="number" name="@input" value="@myValue" placeholder="@input" step="0.01" required />
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
+
+            if(Model.myAnswer.HasValue)
+            {
+            <hr />
+            <div class="form-group">
+                <div class="col-md-2 control-label">
+                    <label for="answert">Answer</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="number" name="answer" id="answer" value="@Model.myAnswer" placeholder="Answer" step="0.01" readonly />
+                </div>
+            </div>
+        }
+}
+    
+    
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" id="submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        
+    }
+
+</div>
+
+<div>
+    @Html.ActionLink("List Equations", "ListRespiratoryEquations", "Respiratory")
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")﻿
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")﻿
+}
+
+@*<script>
+    $(document).ready(function(){
+        $("#submit").click(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '@Url.Action("CalcEquationForm")',
+                    type: "GET",
+                    data: { id: $("Shareitem").val(), access_token: $("access_token").val() },
+                    success: function (result) {
+                    $("sharelink").html(result);
+
+        }});
+      });
+    });
+    </script>*@
